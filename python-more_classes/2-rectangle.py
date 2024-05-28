@@ -1,36 +1,34 @@
 #!/usr/bin/python3
 """
-    File for the class Rectangle.
+Rectangle Class
 """
 
 
 class Rectangle:
     """
-        Class that defines a rectangle.
+        Defines class
     """
+
     def __init__(self, width=0, height=0):
+        """Intialization of the Rectangle class
+            Args:
+                width: Width of the rectangle
+                height: Height of the rectangle
         """
-            Initialization of the Rectangle class.
-            Arguments:
-                width (int, optional): Width of the rectangle.
-                height (int, optional): Height of the rectangle.
-        """
-        self.height = height
         self.width = width
-        
+        self.height = height
+
     @property
     def width(self):
-        """
-            Get the width of a rectangle.
+        """Getter method of width
         """
         return self.__width
-    
+
     @width.setter
     def width(self, value):
-        """
-            Setter of the width of a rectangle.
-            Arguments:
-                value (int): Value to add.
+        """Setter Method of width
+            Args:
+                value (int): Value to add
         """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -40,17 +38,15 @@ class Rectangle:
 
     @property
     def height(self):
-        """
-            Get the height of a rectangle.
+        """Getter method of height
         """
         return self.__height
 
     @height.setter
     def height(self, value):
-        """
-            Setter of the height of a rectangle.
-            Arguments:
-                value (int): Value to add.
+        """Setter Method of height
+            Args:
+                value (int): Value to add
         """
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
@@ -59,17 +55,15 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """
-            Returns the rectangle area.
+        """ return the rectangle area of width and height
         """
         return self.width * self.height
 
     def perimeter(self):
-        """
-            Returns the rectangle perimeter.
+        """Method to return perimeter of width and height
         """
         width = self.width
         height = self.height
         if width == 0 or height == 0:
             return 0
-        return (width + height) * 2
+        return 2 * (width + height)
