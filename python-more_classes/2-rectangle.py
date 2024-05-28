@@ -10,10 +10,10 @@ class Rectangle:
     """
     def __init__(self, width=0, height=0):
         """
-        Initialization of the Rectangle class.
-        Arguments:
-        width (int, optional): Width of the rectangle.
-        height (int, optional): Height of the rectangle.
+            Initialization of the Rectangle class.
+            Arguments:
+                width (int, optional): Width of the rectangle.
+                height (int, optional): Height of the rectangle.
         """
         self.height = height
         self.width = width
@@ -21,16 +21,16 @@ class Rectangle:
     @property
     def width(self):
         """
-        Get the width of a rectangle.
+            Get the width of a rectangle.
         """
         return self.__width
     
     @width.setter
     def width(self, value):
         """
-        Setter of the width of a rectangle.
-        Arguments:
-        value (int): Value to add.
+            Setter of the width of a rectangle.
+            Arguments:
+                value (int): Value to add.
         """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -41,16 +41,16 @@ class Rectangle:
     @property
     def height(self):
         """
-        Get the height of a rectangle.
+            Get the height of a rectangle.
         """
         return self.__height
 
     @height.setter
     def height(self, value):
         """
-        Setter of the height of a rectangle.
-        Arguments:
-        value (int): Value to add.
+            Setter of the height of a rectangle.
+            Arguments:
+                value (int): Value to add.
         """
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
@@ -60,13 +60,13 @@ class Rectangle:
 
     def area(self):
         """
-        Returns the rectangle area.
+            Returns the rectangle area.
         """
         return self.width * self.height
 
     def perimeter(self):
         """
-        Returns the rectangle perimeter.
+            Returns the rectangle perimeter.
         """
         width = self.width
         height = self.height
