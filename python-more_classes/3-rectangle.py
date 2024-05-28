@@ -70,4 +70,4 @@ class Rectangle:
             return ""
         for row in range(self.__height - 1):
             print("#" * self.__width)
-            return ("#" * self._width)
+        return ("#" * self._width)
