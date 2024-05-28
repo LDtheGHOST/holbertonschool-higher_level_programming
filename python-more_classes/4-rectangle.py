@@ -50,7 +50,7 @@ class Rectangle:
             raise ValueError("height must ba >= 0")
         self.__height = value
 
-    def area(self)
+    def area(self):
         """Returns the rectangle area"""
         return self.width * self.height
 
@@ -62,7 +62,7 @@ class Rectangle:
             return 0
         return (width + height) * 2
 
-                                                                                                            def __str__(self):
+    def __str__(self):
         """Method string object"""
         if self.__width == 0 or self.__height == 0:
             return ""
@@ -70,6 +70,6 @@ class Rectangle:
             print("#" * self.__width)
         return ("#" * self.__width)
 
-                                                                                                            def __repr__(self):
+    def __repr__(self):
         """repr method"""
         return ("Rectangle({}, {})".format(self.__width, self.__height))
