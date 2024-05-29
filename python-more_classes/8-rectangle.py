@@ -48,7 +48,7 @@ class Rectangle:
             Get the height of a rectangle.
         """
         return self.__height
-    
+
     @height.setter
     def height(self, value):
         """
@@ -77,7 +77,7 @@ class Rectangle:
         if width == 0 or height == 0:
             return 0
         return (width + height) * 2
-    
+
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
         if not isinstance(rect_1, Rectangle):
