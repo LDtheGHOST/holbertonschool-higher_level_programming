@@ -1,32 +1,40 @@
 #!/usr/bin/python3
 """
-Rectangle Class
+    File for the class Rectangle.
 """
 
 
 class Rectangle:
-    """Defines properties of Rectangle Class"""
-
+    """
+        Class that defines a rectangle.
+    """
     number_of_instances = 0
 
     def __init__(self, width=0, height=0):
-        """Creates new instances of Rectangle
-        Args:
-            width (int, optional): width of rectangle
-            height (int, optional): height of rectangle
         """
-        self.width = width
+            Initialization of the Rectangle class.
+            Arguments:
+                width (int, optional): Width of the rectangle.
+                height (int, optional): Height of the rectangle.
+        """
         self.height = height
+        self.width = width
         Rectangle.number_of_instances += 1
 
     @property
     def width(self):
-        """Getter Method of width"""
+        """
+            Get the width of a rectangle.
+        """
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Setter Method of width"""
+        """
+            Setter of the width of a rectangle.
+            Arguments:
+                value (int): Value to add.
+        """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -35,12 +43,18 @@ class Rectangle:
 
     @property
     def height(self):
-        """Getter Method of height"""
+        """
+            Get the height of a rectangle.
+        """
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Setter Method of height"""
+        """
+            Setter of the height of a rectangle.
+            Arguments:
+                value (int): Value to add.
+        """
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -48,31 +62,34 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """Method to return area of width and height"""
-        return self.__width * self.__height
+        """
+            Returns the rectangle area.
+        """
+        return self.width * self.height
 
     def perimeter(self):
-        """Method to return perimeter of width and height"""
-        if self.__width == 0 or self.__height == 0:
+        """
+            Returns the rectangle perimeter.
+        """
+        width = self.width
+        height = self.height
+        if width == 0 or height == 0:
             return 0
-        return (self.__width * 2) + (self.__height * 2)
+        return (width + height) * 2
 
     def __str__(self):
-        """Method srting object"""
-        rectangle = ""
-
-        if self._width == 0 or self.__height == 0:
-            return rectangle
-        for row in range(self.__height):
-            rectangle += ("#" * self.__width) + "\n"
-
-        return rectangle[:-1]
+        text = ""
+        if self.height != 0 and self.width != 0:
+            for i in range(self.height):
+                text += "{:s}{:s}".format(
+                    self.width * "#",
+                    "" if (i + 1) == self.height else "\n"
+                    )
+            return text
 
     def __repr__(self):
-        """repr method"""
-        return ("Rectangle({:d}, {:d})".format(self.__width, self.__height))
+        return "Rectangle({:d}, {:d})".format(self.width, self.height)
 
     def __del__(self):
-        """Delete object/instance"""
-        print("Bye retcangle...")
         Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")
