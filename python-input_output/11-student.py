@@ -33,7 +33,7 @@ class Student:
             for attr in attrs:
                 value = _original_dict.get(attr, None)
                 if value:
-                _dict[attr] = value
+                    _dict[attr] = value
         return _dict
 
     def reload_from_json(self, json):
