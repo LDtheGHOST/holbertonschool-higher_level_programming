@@ -1,4 +1,4 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 """
     File function for load_from_json_file().
 """

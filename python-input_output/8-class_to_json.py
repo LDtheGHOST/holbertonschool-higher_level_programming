@@ -11,5 +11,5 @@ def class_to_json(obj):
             obj: Object to list.
         Return:
             (dict): Dictionnary with values.
-    """    
+    """
     return obj.__dict__
