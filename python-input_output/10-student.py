@@ -1,4 +1,4 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 """
     File class for Student.
 """
@@ -33,15 +33,5 @@ class Student:
             for attr in attrs:
                 value = _original_dict.get(attr, None)
                 if value:
-                _dict[attr] = value
+                    _dict[attr] = value
         return _dict
-
-    def reload_from_json(self, json):
-        """
-            Replaces all attributes of the Student instance.
-            Arguments:
-                json (dict): To replace.
-        """
-        for key in json:
-            val = json[key]
-            setattr(self, key, val)
