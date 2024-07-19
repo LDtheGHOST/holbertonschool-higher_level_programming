@@ -1,8 +1,16 @@
-Hello Bob,
+from flask import Flask, render_template
+import json
 
-You are invited to the Data Science Workshop on 2023-08-20 at San Francisco.
+app = Flask(__name__)
 
-We look forward to your presence.
+@app.route('/items')
+def items():
+    # Load items from items.json
+    with open('items.json') as f:
+        data = json.load(f)
+    
+    # Pass the list of items to the template
+    return render_template('items.html', items=data['items'])
 
-Best regards,
-Event Team
+if __name__ == '__main__':
+    app.run(debug=True) 

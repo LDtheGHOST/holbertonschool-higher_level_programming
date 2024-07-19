@@ -1,38 +1,46 @@
+import logging
 import os
+from collections import defaultdict
+
+class DefaultDict(defaultdict):
+    def __missing__(self, key):
+        return f"{key}: N/A"
 
 def generate_invitations(template, attendees):
+    # Check if the template is a string
     if not isinstance(template, str):
-        print("Error: Template must be a sting.")
+        logging.error(f"Invalid input type for template: Expected str, got {type(template).__name__}")
         return
-    if not isinstance(attendees, list) or not all(isinstance(attendee, dict) for attendee in attendees):
-        print("Error: Attendees must be a list of dictionaries.")
+
+    # Check if attendees is a list of dictionaries
+    if not (isinstance(attendees, list) and all(isinstance(attendee, dict) for attendee in attendees)):
+        logging.error(f"Invalid input type for attendees: Expected list of dictionaries, got {type(attendees).__name__}")
         return
-    
-    if not template:
-        print("Error: Template is empty, no output files generated.")
-        return
-    if not attendees:
-        print("Error: Nodata provied, no output files generated.")
-        return
-    
+
+    if not (isinstance(attendees, list) and all(isinstance(attendee, dict) for attendee in attendees)):
+        raise TypeError("attendees must be a list of dictionaries")
 
     for index, attendee in enumerate(attendees, start=1):
-        personalized_content = template
-        personalized_content = personalized_content.replace("{name}",attendee.get("name", "N/A"))
-        personalized_content = personalized_content.replace("{event_title}",attendee.get("event_title", "N/A"))
-        personalized_content = personalized_content.replace("{event_date}",attendee.get("event_date", "N/A"))
-        personalized_content = personalized_content.replace("{event_location}",attendee.get("event_location", "N/A"))
+        # Use DefaultDict to handle missing data
+        safe_attendee = DefaultDict(lambda: "N/A", attendee)
         
-        output_filename = f"output_{index}.txt"
+        # Substitute placeholders with actual values or "N/A"
+        invitation = template
+        for key in safe_attendee:
+            placeholder = f"{{{key}}}"
+            if placeholder in template:
+                invitation = invitation.replace(placeholder, f"{safe_attendee[key]}")
+            else:
+                # If the placeholder is not in the template, add it with its value or "N/A"
+                invitation += f"\n{key}: {safe_attendee[key]}"
 
-        if os.path.exists(output_filename):
-            print(f"Error: {output_filename} already exists.")
-            continue
-
+        filename = f"output_{index}.txt"
         try:
-            with open(output_filename, "w") as file:
-                file.write(personalized_content)
-            print(f"Generated : {output_filename}")
-        except Exception as e:
-            print(f"Error: Unable to write to {output_filename}.")
-            print(e)
+            if os.path.exists(filename):
+                logging.warning(f"File {filename} already exists. Skipping to avoid overwriting.")
+                continue
+
+            with open(filename, "w") as file:
+                file.write(invitation)
+        except IOError as e:
+            logging.error(f"Failed to write to {filename}: {e}")

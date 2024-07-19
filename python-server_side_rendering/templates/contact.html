@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Contact Us - My Flask App</title>
-</head>
-<body>
-    {% include 'header.html' %}
-    <h1>Contact Us</h1>
-    <p>This page contains contact information</p>
-    {% include 'footer.html' %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Contact Us</h1>
+<p>Have questions? We would love to hear from you. Here's how you can reach us...</p>
+{% endblock %}

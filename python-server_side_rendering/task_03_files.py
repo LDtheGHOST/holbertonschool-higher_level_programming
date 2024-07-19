@@ -4,39 +4,42 @@ import csv
 
 app = Flask(__name__)
 
-def read_json(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-    return data
+def read_json_file(filepath):
+    with open(filepath, 'r') as file:
+        return json.load(file)
 
-def read_csv(file_path):
-    with open(file_path, 'r') as file:
+def read_csv_file(filepath):
+    products = []
+    with open(filepath, newline='') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            row['id'] = int(row['id'])
-            row['price'] = float(row['price'])
+            row['price'] = float(row['price'])  # Ensure price is a float
             products.append(row)
     return products
 
 @app.route('/products')
-def products():
-    source = request.agrs.get('source')
-    product_id = request.agrs.get('id', type=int)
+def show_products():
+    source = request.args.get('source', 'json')
+    product_id = request.args.get('id')
+    products = []
+    error_message = None
 
     if source not in ['json', 'csv']:
-        return render_template('product_display.html', error='Wrong source')
-    
-    if source == 'json':
-        products = read_json('products.json')
-    elif source == 'csv':
-        products = read_csv('products.csv')
+        error_message = "Wrong source"
+    else:
+        if source == 'json':
+            products = read_json_file('products.json')
+        elif source == 'csv':
+            products = read_csv_file('products.csv')
 
-    if product_id:
-        products = [product for product in products if product['id'] == product_id]
-        if not products:
-            return render_template('product_display.html', error='Product not found')
-        
-    return render_template('product_display.html', products=products)
+        if product_id:
+            filtered_products = [product for product in products if str(product['id']) == product_id]
+            if not filtered_products:
+                error_message = "Product not found"
+            else:
+                products = filtered_products
+
+    return render_template('product_display.html', products=products, error_message=error_message)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)

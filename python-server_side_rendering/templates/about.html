@@ -1,12 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <title>About Us - My Flask App</title>
-</head>
-<body>
-    {% include 'header.html' %}
-    <h1>About Us</h1>
-    <p>Thius page contains information about us.</p>
-    {% include 'footer.html' %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>About Us</h1>
+<p>We are a company that loves doing what we do! This page is all about our mission, vision, and the values that drive us.</p>
+{% endblock %}
