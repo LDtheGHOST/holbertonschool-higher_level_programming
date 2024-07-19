@@ -19,5 +19,6 @@ def create_database():
     ''')
     conn.commit()
     conn.close()
+
 if __name__ == '__main__':
     create_database()
