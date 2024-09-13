@@ -1,6 +1,0 @@
-#!/user/bin/python3
-def raise_exception_msg(message=""):
-    class NameException(Exception):
-        pass
-
-    raise NameError(message)
