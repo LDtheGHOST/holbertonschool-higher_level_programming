@@ -1,0 +1,39 @@
+Curl ( Client Url )
+-0 : utiliser le protocole HTTP 1.0 ;
+-1 : utiliser le protocole de chiffrement TLSv1 ;
+-2 : utiliser SSLv2 ;
+-3 : utiliser SSLv3 ;
+-4 : utiliser IPv4 ;
+-6 : utiliser IPv6 ;
+-A : spécifier un USER_AGENT personnalisé ;
+-b : enregistrer les cookies dans un fichier ;
+-c : envoyer les cookies au serveur à partir d'un fichier ;
+-C : reprendre le téléchargement à partir de l'endroit où il s'est arrêté ou d'un décalage spécifique ;
+-m : définir le temps d'attente maximum pour la réponse du serveur ;
+-d : envoyer des données avec la méthode POST ;
+-D : enregistrer les en-têtes renvoyés par le serveur dans un fichier ;
+-e : définir le champ Referer-URI, indiquant le site d'origine de l'utilisateur ;
+-E : utiliser un certificat SSL externe ;
+-f : ne pas afficher les messages d'erreur ;
+-F : envoyer des données sous forme de formulaire ;
+-G : si activé, les données spécifiées avec l'option -d seront envoyées avec la méthode GET ;
+-H : envoyer des en-têtes personnalisés au serveur ;
+-I : ne récupérer que les en-têtes HTTP et ignorer le contenu de la page ;
+-j : lire et envoyer les cookies à partir d'un fichier ;
+-J : supprimer un en-tête de la requête ;
+-L : accepter et suivre les redirections ;
+-s : définir le nombre maximum de redirections via Location ;
+-o : écrire le contenu de la page dans un fichier ;
+-O : enregistrer le contenu dans un fichier avec le nom de la page ou du fichier sur le serveur ;
+-p : utiliser un proxy ;
+--proto : spécifier le protocole à utiliser ;
+-R : conserver la date de modification du fichier distant ;
+-s : minimiser les informations sur les erreurs ;
+-S : afficher les messages d'erreur ;
+-T : télécharger un fichier vers le serveur ;
+-v : afficher des informations très détaillées ;
+-y : définir la vitesse minimale de téléchargement ;
+-Y : définir la vitesse maximale de téléchargement ;
+-z : télécharger un fichier uniquement s'il a été modifié après un certain temps ;
+-V : afficher la version de curl.
+Cela correspond aux principales options que vous pouvez utiliser avec la commande curl pour contrôler divers aspects du téléchargement et de l'envoi de requêtes HTTP.
