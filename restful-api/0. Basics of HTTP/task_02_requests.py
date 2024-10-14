@@ -1,28 +1,23 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 import requests
 import csv
 
-
 def fetch_and_print_posts():
-    response = requests.get("https://jsonplaceholder.typicode.com/posts")
-    print(f"Status Code: {response.status_code}")
-
+    response = requests.get('https://jsonplaceholder.typicode.com/posts')
+    print(f'Status Code: {response.status_code}')
     if response.status_code == 200:
         posts = response.json()
         for post in posts:
             print(post['title'])
 
-
 def fetch_and_save_posts():
-    response = requests.get("https://jsonplaceholder.typicode.com/posts")
-
+    response = requests.get('https://jsonplaceholder.typicode.com/posts')
+    print(f'Status Code: {response.status_code}')
     if response.status_code == 200:
         posts = response.json()
-        structured_data = [{'id': post['id'], 'title': post['title'], 'body': post['body']} for post in posts]
-
-        with open('posts.csv', 'w', newline='') as csvfile:
-            fieldnames = ['id', 'title', 'body']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
+        with open('posts.csv', mode='w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=['id', 'title', 'body'])
             writer.writeheader()
-            writer.writerows(structured_data)
+            for post in posts:
+                writer.writerow({'id': post['id'], 'title': post['title'], 'body': post['body']})
