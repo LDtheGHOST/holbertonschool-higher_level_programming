@@ -71,4 +71,4 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 with socketserver.TCPServer(("", PORT), SimpleHTTPRequestHandler) as httpd:
     print(f"Serving on port {PORT}")
     httpd.serve_forever()
-    """on sort des condition et with avec """
+    """on sort des condition et with avec pour ensuit imprimer le port"""
