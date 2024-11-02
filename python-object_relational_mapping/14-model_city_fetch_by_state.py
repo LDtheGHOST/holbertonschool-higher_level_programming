@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """
-    Script that lists all State objects from the database.
+    Script that prints all City objects from the database.
 """
 import sys
-from model_state import Base, State
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import Session
+
+from model_state import Base, State
+from model_city import City
 
 
 if __name__ == "__main__":
@@ -20,6 +22,7 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 
     session = Session(engine)
-    q = session.query(State).where(State.name.ilike("%a%"))
-    for state in q.all():
-        print("{:d}: {:s}".format(state.id, state.name))
+    cities = session.query(City, State).join(State).order_by(City.id).all()
+
+    for city, state in cities:
+        print(f"{state.name}: ({city.id}) {city.name}")
