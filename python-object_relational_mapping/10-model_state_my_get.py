@@ -1,39 +1,30 @@
 #!/usr/bin/python3
 """
-1-filter_states.py
-List all states with a name starting with N,
-from the database hbtn_0e_0_usa
+10-model_state_my_get.py
+Script that prints the State object with the name passed as an argument
+from the database hbtn_0e_6_usa.
 """
 import sys
-import MySQLdb
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 if __name__ == "__main__":
-    """
-    Main function that executes the database connection,
-    and retrieval of states.
-    """
-
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-
-    db = MySQLdb.connect(
-        host="localhost",
-        user=username,
-        passwd=password,
-        db=database,
-        port=3306
+    """Main function."""
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'.format(
+            sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True
     )
+    Base.metadata.create_all(engine)
 
-    cursor = db.cursor()
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-    states = cursor.fetchall()
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
 
-    for state in states:
-        if state[1][0] == 'N':
-            print(state)
+    if state:
+        print(state.id)
+    else:
+        print("Not found")
 
-    cursor.close()
-    db.close()
+    session.close()
